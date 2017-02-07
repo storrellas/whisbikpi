@@ -1,5 +1,9 @@
 package com.whisbi.kpi;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 public class ClientKpi {
 
 	public ClientKpi(String kpi_guid, String cookieguid, String branch,
