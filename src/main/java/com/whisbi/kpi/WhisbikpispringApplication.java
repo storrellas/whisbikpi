@@ -2,12 +2,18 @@ package com.whisbi.kpi;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.apache.bcel.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +31,9 @@ public class WhisbikpispringApplication {
 
     private static final Logger log = LoggerFactory.getLogger(WhisbikpispringApplication.class);
     
+
+    @Autowired
+    ClientKpiRepository respository;
 	
     @RequestMapping("/kpi")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
@@ -33,7 +42,7 @@ public class WhisbikpispringApplication {
     }
 
     @RequestMapping("/api/tracking")
-    public ClientKpi tracking(@RequestParam String branch, 
+    public ClientKpiKey tracking(@RequestParam String branch, 
     					        @RequestParam String clientbrowser, 
     					        @RequestParam String clientdevice,
     					        @RequestParam String clientos,
@@ -44,7 +53,16 @@ public class WhisbikpispringApplication {
     					        ) {
     	
     	log.info("Request URL: " + request.getRequestURL().toString() + " " + request.getQueryString());
-    	return new ClientKpi(branch, clientbrowser, clientdevice, clientos, cookieguid, kpiguid, kpi);
+    	
+    	ClientKpiKey client_key = new ClientKpiKey(branch, clientbrowser, clientdevice, clientos, cookieguid, kpiguid, kpi);
+    	ClientKpi client = new ClientKpi();
+    	client.setId(client_key);
+    	
+    	
+    	//this.respository.save(client);
+    	
+    	//return new ClientKpiKey(branch, clientbrowser, clientdevice, clientos, cookieguid, kpiguid, kpi);
+    	return client_key;
     }
     
 
