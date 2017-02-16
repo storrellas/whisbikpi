@@ -4,10 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Persistable;
+
 @Entity
 @Table(name = "TBT_ODS_KPI_NEW")
-class ClientKpi {
+class ClientKpi{
 
+	private static final Logger log = LoggerFactory.getLogger(WhisbikpispringApplication.class);
+	
 	@Override
 	public String toString() {
 		return "ClientKpi [id=" + id.toString() + "]";
@@ -23,5 +29,6 @@ class ClientKpi {
 	public ClientKpiKey getId() {
 		return id;
 	}
-	
+
+
 }
