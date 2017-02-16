@@ -48,20 +48,26 @@ public class WhisbikpispringApplication {
     					        @RequestParam String clientos,
     					        @RequestParam String cookieguid,
     					        @RequestParam String kpiguid,
-    					        @RequestParam String kpi,
+    					        @RequestParam int kpi,
     					        HttpServletRequest request
     					        ) {
     	
     	log.info("Request URL: " + request.getRequestURL().toString() + " " + request.getQueryString());
     	
-    	ClientKpiKey client_key = new ClientKpiKey(branch, clientbrowser, clientdevice, clientos, cookieguid, kpiguid, kpi);
+    	
+    	ClientKpiKey client_key = new ClientKpiKey(kpiguid, cookieguid, branch, kpi, clientbrowser, clientdevice, clientos);
     	ClientKpi client = new ClientKpi();
     	client.setId(client_key);
+
+    	log.info(" ");
+    	log.info("ClientKpi: " + client.toString());
+    	log.info(" ");
+
     	
+    	//respository.save(client);
+    	//this.respository.flush();
+    	this.respository.saveAndFlush(client);
     	
-    	//this.respository.save(client);
-    	
-    	//return new ClientKpiKey(branch, clientbrowser, clientdevice, clientos, cookieguid, kpiguid, kpi);
     	return client_key;
     }
     

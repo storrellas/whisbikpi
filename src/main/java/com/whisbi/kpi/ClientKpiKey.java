@@ -9,8 +9,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ClientKpiKey implements Serializable {
 
+	@Override
+	public String toString() {
+		return "ClientKpiKey [_kpi_guid=" + _kpi_guid + ", _cookieguid="
+				+ _cookieguid + ", _branch=" + _branch + ", _kpi=" + _kpi
+				+ ", _clientbrowser=" + _clientbrowser + ", _clientdevice="
+				+ _clientdevice + ", _clientos=" + _clientos + "]";
+	}
 	public ClientKpiKey(String kpi_guid, String cookieguid, String branch,
-			String kpi, String clientbrowser, String clientdevice,
+			int kpi, String clientbrowser, String clientdevice,
 			String clientos) {
 		super();
 		this._kpi_guid = kpi_guid;
@@ -30,7 +37,7 @@ public class ClientKpiKey implements Serializable {
 	@Column(name = "BranchGuid")
     private String _branch;
 	@Column(name = "KpiCode")
-    private String _kpi;
+    private int _kpi;
 	@Column(name = "Browser")
     private String _clientbrowser;
 	@Column(name = "Device")
@@ -61,10 +68,10 @@ public class ClientKpiKey implements Serializable {
 		this._branch = _branch;
 	}
 
-	public String get_kpi() {
+	public int get_kpi() {
 		return _kpi;
 	}
-	public void set_kpi(String _kpi) {
+	public void set_kpi(int _kpi) {
 		this._kpi = _kpi;
 	}
 

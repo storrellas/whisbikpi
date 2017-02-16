@@ -8,6 +8,11 @@ import javax.persistence.Table;
 @Table(name = "TBT_ODS_KPI_NEW")
 class ClientKpi {
 
+	@Override
+	public String toString() {
+		return "ClientKpi [id=" + id.toString() + "]";
+	}
+
 	@Id
 	private ClientKpiKey id;
 	
