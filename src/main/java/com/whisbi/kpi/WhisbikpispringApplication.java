@@ -1,48 +1,25 @@
 package com.whisbi.kpi;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 
-import org.aspectj.apache.bcel.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.whisbi.kpi.InteractionKpi.interaction_type;
-import com.whisbi.kpi.InteractionKpi.room_type;
-import com.whisbi.kpi.InteractionKpi.room_user_type;
 
 @RestController
 @SpringBootApplication
 public class WhisbikpispringApplication {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
     private static final Logger log = LoggerFactory.getLogger(WhisbikpispringApplication.class);
     
-
     @Autowired
     ClientKpiRepository respository;
 	
-    @RequestMapping("/kpi")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
-
     @RequestMapping("/api/tracking")
     public ClientKpiKey tracking(@RequestParam String branch, 
     					        @RequestParam String clientbrowser, 
