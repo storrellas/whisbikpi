@@ -28,8 +28,8 @@ public class WhisbikpispringApplication {
     					        @RequestParam String cookieguid,
     					        @RequestParam String kpiguid,
     					        @RequestParam int kpi,
-    					        HttpServletRequest request
-    					        ) {
+    					        HttpServletRequest request) 
+    {
     	
     	log.info("Request URL: " + request.getRequestURL().toString() + " " + request.getQueryString());
     	
@@ -55,10 +55,15 @@ public class WhisbikpispringApplication {
     					        ) {    	
     	log.info("Request URL: " + request.getRequestURL().toString() + "?" + request.getQueryString());
     	    	
-    	InteractionKpi.interaction_type interaction_type_enum = InteractionKpi.interaction_type.values()[interaction_code];
-    	InteractionKpi.room_user_type user_type_enum = InteractionKpi.room_user_type.values()[user_type];
-    	InteractionKpi.room_type room_type_enum = InteractionKpi.room_type.values()[room_type];   	
-    	return new InteractionKpi(interaction_type_enum, session_guid, user_id, interaction_value, user_type_enum, room_type_enum);
+    	InteractionKpiKey.interaction_type interaction_type_enum = InteractionKpiKey.interaction_type.values()[interaction_code];
+    	InteractionKpiKey.room_user_type user_type_enum = InteractionKpiKey.room_user_type.values()[user_type];
+    	InteractionKpiKey.room_type room_type_enum = InteractionKpiKey.room_type.values()[room_type];
+    	InteractionKpiKey interaction_key = 
+    			new InteractionKpiKey(interaction_type_enum, session_guid, user_id, interaction_value, user_type_enum, room_type_enum);
+    	
+    	InteractionKpi interaction = new InteractionKpi();
+    	interaction.setId(interaction_key);
+    	return interaction;
     }
         
     
